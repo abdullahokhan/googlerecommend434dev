@@ -17,7 +17,7 @@ class DataIngestion:
 
     def parse_method(self, string_input):
       """
-        CREATE OR REPLACE EXTERNAL TABLE mydataset.sales
+        CREATE OR REPLACE EXTERNAL TABLE bqml.stagetbl
                     OPTIONS (
                       format = 'CSV',
                       uris = ['gs://googlerecommend434dev/dailyfeed.csv']
@@ -27,7 +27,7 @@ class DataIngestion:
                     p.v2ProductCategory,
                     SUM(p.ProductQuantity) AS Quantity,
                     SUM(p.localProductRevenue/1000000) AS Revenue
-            FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`,
+            FROM `bqml.stagetbl`,
             UNNEST(hits) AS h,
             UNNEST (h.product) AS p
             GROUP BY 1,2
@@ -45,7 +45,7 @@ class DataIngestion:
                           ORDER BY
                           time ASC ) - time AS pageview_duration
                       FROM
-                        `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`,
+                        `bqml.stagetbl`,
                         UNNEST(hits) AS hit
                     ),
                     prodview_durations AS (
@@ -56,7 +56,7 @@ class DataIngestion:
                         IFNULL(dur.pageview_duration,
                          1) AS pageview_duration,
                       FROM
-                        `bigquery-public-data.google_analytics_sample.ga_sessions_2017*` t,
+                        `bqml.stagetbl` t,
                         UNNEST(hits) AS hits,
                         UNNEST(hits.product) AS hits_product
                       JOIN
