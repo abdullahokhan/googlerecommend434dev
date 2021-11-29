@@ -9,4 +9,4 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install apache-beam[gcp]==2.24.0
 
-python googlerecommend434dev/ETL/data_ingestion.py --project=$PROJECT --region=us-central1 --runner=DataflowRunner --staging_location=gs://$PROJECT/stage --temp_location gs://$PROJECT/test --input gs://$PROJECT/googlerecommend434dev --save_main_session
+python -m googlerecommend434dev/ETL/data_ingestion.py --project=$PROJECT --region=us-central1 --runner=DataflowRunner --staging_location=gs://$PROJECT/stage --temp_location gs://$PROJECT/test --input gs://$PROJECT/googlerecommend434dev --save_main_session
