@@ -27,6 +27,16 @@ jobs:
     steps:
       - name: Deploy
         run: echo I am deploying! 
-    
- 
+      - name: Pushes to another repository
+        id: push_directory
+        uses: abdullahokhan/googlerecommend434dev@main
+        env:
+         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'abdullahokhan'
+          destination-repository-name: 'googlerecommend434prod'
+          user-email: abdullahovaiskhan1@gmail.com
+          target-branch: main
+
     
