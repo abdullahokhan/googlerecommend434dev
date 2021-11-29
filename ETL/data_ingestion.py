@@ -1,7 +1,7 @@
 
 """`data_ingestion.py` is a Dataflow pipeline which reads a file and writes its
-contents to a BigQuery table.
-This example does not do any transformation on the data.
+contents to a BigQuery table and rebuild model.
+
 """
 
 import argparse
@@ -17,6 +17,11 @@ class DataIngestion:
 
     def parse_method(self, string_input):
       """
+        CREATE OR REPLACE EXTERNAL TABLE mydataset.sales
+                    OPTIONS (
+                      format = 'CSV',
+                      uris = ['gs://googlerecommend434dev/dailyfeed.csv']
+                    )
         CREATE OR REPLACE TABLE bqml.top_products AS (
             SELECT  p.v2ProductName,
                     p.v2ProductCategory,
