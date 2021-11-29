@@ -22,7 +22,7 @@ jobs:
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 
-      name: Development
+      name: dev env
       url: 'vivid-poet-333222.uc.r.appspot.com '
     steps:
       - name: Deploy
